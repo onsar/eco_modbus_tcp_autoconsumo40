@@ -84,12 +84,17 @@ def emoncms_tx(_tx_server,_tx_register,_value):
 
     global tx_ok
     global tx_sent
-
-    url = "http://{0}{1}/input/post.json".format(tx_cms_ip,tx_path)
-    string_node_name = "?node={0}".format(_tx_server)
-    string_name_value = "&json={0}:{1}".format(_tx_register,_value)
-    key_write = "&apikey={0}".format(tx_key)
-    full_url = url + string_node_name + string_name_value + key_write
+    
+    #full_url = "https://center.autoconsumo.cloud/api/input/instalation/status/c7e7ebc1783ea5d8faf432f46aa8942e659718a7?param1=1&param2=2"
+    url = "https://center.autoconsumo.cloud/api/input/instalation/status/{0}".format(tx_key)
+    string_name_value ="?{0}={1}".format(_tx_register,_value)
+  
+    # url = "http://{0}{1}/input/post.json".format(tx_cms_ip,tx_path)
+    # string_node_name = "?node={0}".format(_tx_server)
+    
+    # string_name_value = "&json={0}:{1}".format(_tx_register,_value)
+    # key_write = "&apikey={0}".format(tx_key)
+    full_url = url + string_name_value
     logging.info(full_url)
 
     #Transmision de datos al servidor emonCMS
